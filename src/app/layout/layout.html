@@ -1,7 +1,20 @@
-<div class="flex h-screen">
-  <app-sidenav></app-sidenav>
-  <div class="flex-1 flex flex-col">
-    <app-header></app-header>
+<div class="flex h-screen relative">
+  <!-- Sidenav Overlay for mobile/tablet -->
+  <div
+    *ngIf="isSidenavOpen"
+    class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+    (click)="closeSidenav()">
+  </div>
+
+  <!-- Sidenav -->
+  <app-sidenav
+    [class]="isSidenavOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+    class="fixed lg:static inset-y-0 left-0 z-50 transition-transform duration-300 ease-in-out">
+  </app-sidenav>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col min-w-0">
+    <app-header (menuClick)="toggleSidenav()"></app-header>
     <main class="flex-1 p-4 overflow-auto">
       <router-outlet></router-outlet>
     </main>
