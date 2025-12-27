@@ -13,17 +13,26 @@ export class DashboardService {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
         datasets: [{
           label: 'Sales',
-          data: [12, 19, 3, 5, 2],
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
+          data: [1200, 1900, 300, 500, 200],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
           }
         }
       }
@@ -37,14 +46,27 @@ export class DashboardService {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
         datasets: [{
           label: 'Revenue',
-          data: [65, 59, 80, 81, 56],
+          data: [6500, 5900, 8000, 8100, 5600],
           fill: false,
-          borderColor: 'rgb(75, 192, 192)',
+          borderColor: 'rgb(255, 99, 132)',
           tension: 0.1
         }]
       },
       options: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            grid: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
       }
     };
   }

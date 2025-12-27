@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
+import 'chart.js/auto';
 
 @Component({
   selector: 'app-chart',

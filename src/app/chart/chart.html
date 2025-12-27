@@ -1,7 +1,10 @@
-<div class="chart-container" style="height: 300px;">
+<div class="chart-container w-full h-full">
   <canvas baseChart
-          [data]="chartData.data"
+          [datasets]="chartData.data.datasets"
+          [labels]="chartData.data.labels"
           [options]="chartData.options"
-          [type]="chartData.type">
+          [type]="chartData.type"
+          width="400"
+          height="200">
   </canvas>
 </div>
