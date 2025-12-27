@@ -57,6 +57,13 @@
     </div>
   </div>
 
+  <!-- Quick Actions -->
+  <app-quick-actions
+    (newProjectTask)="onNewProjectTask()"
+    (requestTime)="onRequestTime()"
+    (generateReport)="onGenerateReport()">
+  </app-quick-actions>
+
   <!-- Recent Transactions -->
   <app-recent-transactions></app-recent-transactions>
 </div>

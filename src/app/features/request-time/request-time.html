@@ -1,0 +1,62 @@
+<div class="p-6">
+  <h2 class="text-xl font-semibold mb-4 text-gray-800">Request Time Off</h2>
+
+  <form [formGroup]="requestForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Start Date -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate" [min]="today">
+      <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+      <mat-error *ngIf="requestForm.get('startDate')?.hasError('required')">
+        Start date is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- End Date -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate" [min]="requestForm.get('startDate')?.value || today">
+      <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+      <mat-error *ngIf="requestForm.get('endDate')?.hasError('required')">
+        End date is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Leave Type -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Leave Type</mat-label>
+      <mat-select formControlName="leaveType">
+        <mat-option *ngFor="let type of leaveTypes" [value]="type.value">
+          {{ type.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="requestForm.get('leaveType')?.hasError('required')">
+        Leave type is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Reason -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Reason</mat-label>
+      <textarea matInput formControlName="reason" rows="3" placeholder="Please provide a reason for your time off request"></textarea>
+      <mat-error *ngIf="requestForm.get('reason')?.hasError('required')">
+        Reason is required
+      </mat-error>
+      <mat-error *ngIf="requestForm.get('reason')?.hasError('minlength')">
+        Reason must be at least 10 characters long
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Actions -->
+    <div class="flex justify-end space-x-3 pt-4">
+      <button mat-button type="button" (click)="onCancel()" class="text-gray-600">
+        Cancel
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!requestForm.valid">
+        Submit Request
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <button mat-raised-button color="primary" (click)="newProjectTask.emit()">
+      <mat-icon>add</mat-icon>
+      New Project Task
+    </button>
+    <button mat-raised-button color="accent" (click)="requestTime.emit()">
+      <mat-icon>schedule</mat-icon>
+      Request Time
+    </button>
+    <button mat-raised-button color="warn" (click)="generateReport.emit()">
+      <mat-icon>download</mat-icon>
+      Generate Report
+    </button>
+  </div>
+</div>
