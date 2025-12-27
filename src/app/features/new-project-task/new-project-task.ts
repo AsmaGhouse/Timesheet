@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -31,17 +31,17 @@ import { MatIconModule } from '@angular/material/icon';
     <h2 mat-dialog-title>Create New Project/Task</h2>
     <mat-dialog-content>
       <form [formGroup]="projectForm" class="flex flex-col gap-4">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Project Name</mat-label>
           <input matInput formControlName="name" placeholder="Enter project name">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description" rows="3" placeholder="Project description"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Priority</mat-label>
           <mat-select formControlName="priority">
             <mat-option value="low">Low</mat-option>
@@ -51,21 +51,21 @@ import { MatIconModule } from '@angular/material/icon';
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Start Date</mat-label>
           <input matInput [matDatepicker]="startPicker" formControlName="startDate">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Due Date</mat-label>
           <input matInput [matDatepicker]="duePicker" formControlName="dueDate">
           <mat-datepicker-toggle matSuffix [for]="duePicker"></mat-datepicker-toggle>
           <mat-datepicker #duePicker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Assigned Team Members</mat-label>
           <mat-chip-grid #chipGrid>
             <mat-chip-row *ngFor="let member of selectedMembers" (removed)="removeMember(member)">
@@ -74,11 +74,15 @@ import { MatIconModule } from '@angular/material/icon';
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip-row>
+            <input matInput
+                   [matChipInputFor]="chipGrid"
+                   formControlName="newMember"
+                   placeholder="Add team member"
+                   (matChipInputTokenEnd)="addMember($event)">
           </mat-chip-grid>
-          <input matInput formControlName="newMember" placeholder="Add team member" (keydown.enter)="addMember()">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Estimated Hours</mat-label>
           <input matInput type="number" formControlName="estimatedHours" placeholder="0">
         </mat-form-field>
@@ -95,6 +99,9 @@ import { MatIconModule } from '@angular/material/icon';
     }
     textarea {
       resize: vertical;
+    }
+    mat-form-field {
+      max-height: 80px !important;
     }
   `]
 })
@@ -118,12 +125,14 @@ export class NewProjectTaskComponent {
     });
   }
 
-  addMember() {
-    const member = this.projectForm.get('newMember')?.value?.trim();
-    if (member && !this.selectedMembers.includes(member)) {
-      this.selectedMembers.push(member);
-      this.projectForm.get('newMember')?.setValue('');
+  addMember(event: MatChipInputEvent) {
+    const value = (event.value || '').trim();
+    if (value && !this.selectedMembers.includes(value)) {
+      this.selectedMembers.push(value);
     }
+    // Clear the input value
+    event.chipInput!.clear();
+    this.projectForm.get('newMember')?.setValue('');
   }
 
   removeMember(member: string) {

@@ -29,7 +29,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
     <h2 mat-dialog-title>Generate Report</h2>
     <mat-dialog-content>
       <form [formGroup]="reportForm" class="flex flex-col gap-4">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Report Type</mat-label>
           <mat-select formControlName="reportType">
             <mat-option value="timesheet">Timesheet Report</mat-option>
@@ -40,14 +40,14 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
         </mat-form-field>
 
         <div class="flex gap-4">
-          <mat-form-field appearance="outline" class="flex-1">
+          <mat-form-field appearance="fill" class="flex-1">
             <mat-label>Start Date</mat-label>
             <input matInput [matDatepicker]="startPicker" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
             <mat-datepicker #startPicker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="flex-1">
+          <mat-form-field appearance="fill" class="flex-1">
             <mat-label>End Date</mat-label>
             <input matInput [matDatepicker]="endPicker" formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
@@ -55,7 +55,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
           </mat-form-field>
         </div>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Project</mat-label>
           <mat-select formControlName="project">
             <mat-option value="all">All Projects</mat-option>
@@ -84,7 +84,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Recipient Email (optional)</mat-label>
           <input matInput formControlName="email" type="email" placeholder="Enter email to send report">
         </mat-form-field>
@@ -98,6 +98,9 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   styles: [`
     mat-dialog-content {
       min-width: 600px;
+    }
+    mat-form-field {
+      max-height: 80px !important;
     }
   `]
 })

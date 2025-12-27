@@ -27,7 +27,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
     <h2 mat-dialog-title>Request Time Off</h2>
     <mat-dialog-content>
       <form [formGroup]="timeOffForm" class="flex flex-col gap-4">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Leave Type</mat-label>
           <mat-select formControlName="leaveType">
             <mat-option value="vacation">Vacation</mat-option>
@@ -38,31 +38,31 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Start Date</mat-label>
           <input matInput [matDatepicker]="startPicker" formControlName="startDate">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>End Date</mat-label>
           <input matInput [matDatepicker]="endPicker" formControlName="endDate">
           <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
           <mat-datepicker #endPicker></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Number of Days</mat-label>
           <input matInput type="number" formControlName="days" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Reason</mat-label>
           <textarea matInput formControlName="reason" rows="3" placeholder="Please provide a reason for your time off request"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Contact Information (while on leave)</mat-label>
           <input matInput formControlName="contactInfo" placeholder="Phone number or email">
         </mat-form-field>
@@ -79,6 +79,9 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
     }
     textarea {
       resize: vertical;
+    }
+    mat-form-field {
+      max-height: 80px !important;
     }
   `]
 })
