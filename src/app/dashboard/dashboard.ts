@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from '../chart/chart';
+import { RecentTransactions } from '../features/recent-transactions/recent-transactions';
 import { DashboardService } from '../dashboard';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Chart],
+  imports: [Chart, RecentTransactions],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
