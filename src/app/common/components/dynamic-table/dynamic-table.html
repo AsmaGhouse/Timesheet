@@ -30,7 +30,10 @@
       <tr *ngFor="let row of data">
         <ng-container *ngFor="let column of columns">
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" [class.text-center]="column.key === 'actions'">
-            <ng-container *ngIf="column.key !== 'status' && column.key !== 'actions'">
+            <ng-container *ngIf="column.key === 'select'">
+              <input type="checkbox" [checked]="selectedItems.includes(row[idKey])" (change)="selectionChange.emit(row[idKey])" class="rounded">
+            </ng-container>
+            <ng-container *ngIf="column.key !== 'status' && column.key !== 'actions' && column.key !== 'select'">
               {{ row[column.key] }}
             </ng-container>
             <ng-container *ngIf="column.key === 'status'">

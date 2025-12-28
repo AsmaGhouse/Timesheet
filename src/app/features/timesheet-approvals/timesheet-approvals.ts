@@ -102,6 +102,7 @@ export class TimesheetApprovals {
   selectedTimesheets: number[] = [];
 
   columns = [
+    { key: 'select', label: '' },
     { key: 'employee', label: 'Employee' },
     { key: 'period', label: 'Period' },
     { key: 'projects', label: 'Projects' },
@@ -112,6 +113,7 @@ export class TimesheetApprovals {
 
   get tableData() {
     return this.paginatedTimesheets.map(timesheet => ({
+      id: timesheet.id,
       employee: `${timesheet.employee.name} (${timesheet.employee.role})`,
       period: timesheet.period,
       projects: timesheet.projects.join(', '),

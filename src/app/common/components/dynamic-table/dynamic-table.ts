@@ -17,5 +17,8 @@ export class DynamicTable {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
   @Input() loading: boolean = false;
+  @Input() selectedItems: any[] = [];
+  @Input() idKey: string = 'id';
   @Output() actionClick = new EventEmitter<{ action: string; row: any }>();
+  @Output() selectionChange = new EventEmitter<any>();
 }
