@@ -74,7 +74,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
           <mat-checkbox formControlName="includeComments">Comments and Notes</mat-checkbox>
         </div>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="fill">
           <mat-label>Format</mat-label>
           <mat-select formControlName="format">
             <mat-option value="pdf">PDF</mat-option>
@@ -97,7 +97,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   `,
   styles: [`
     mat-dialog-content {
-      min-width: 600px;
+      max-width: 90vw;
+      overflow-x: hidden;
     }
     mat-form-field {
       max-height: 80px !important;

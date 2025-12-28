@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appStatusBadge]'
+  selector: '[appStatusBadge]',
+  standalone: true
 })
 export class StatusBadge implements OnInit {
   @Input() appStatusBadge!: string;
@@ -13,13 +14,13 @@ export class StatusBadge implements OnInit {
     element.classList.add('px-2', 'inline-flex', 'text-xs', 'leading-5', 'font-semibold', 'rounded-full');
 
     switch (this.appStatusBadge) {
-      case 'Completed':
+      case 'Approved':
         element.classList.add('bg-green-100', 'text-green-800');
         break;
       case 'Pending':
         element.classList.add('bg-yellow-100', 'text-yellow-800');
         break;
-      case 'Failed':
+      case 'Rejected':
         element.classList.add('bg-red-100', 'text-red-800');
         break;
       default:

@@ -18,12 +18,14 @@ import { ChartConfiguration } from 'chart.js';
 export class Dashboard implements OnInit {
   barChartData!: ChartConfiguration;
   lineChartData!: ChartConfiguration;
+  currentDate!: string;
 
   constructor(private dashboardService: DashboardService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.barChartData = this.dashboardService.getBarChartData();
     this.lineChartData = this.dashboardService.getLineChartData();
+    this.currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).replace(' ', ', ');
   }
 
   onNewProjectTask() {
@@ -56,7 +58,8 @@ export class Dashboard implements OnInit {
 
   onGenerateReport() {
     const dialogRef = this.dialog.open(GenerateReportComponent, {
-      width: '700px',
+      width: '90vw',
+      maxWidth: '600px',
       disableClose: true
     });
 
