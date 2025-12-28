@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DynamicTable, TableColumn } from '../../common/components/dynamic-table/dynamic-table';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialog } from '../../common/components/confirmation-dialog/confirmation-dialog';
 
 @Component({
   selector: 'app-recent-transactions',
@@ -8,6 +10,8 @@ import { DynamicTable, TableColumn } from '../../common/components/dynamic-table
   styleUrl: './recent-transactions.css',
 })
 export class RecentTransactions {
+  constructor(private dialog: MatDialog) {}
+
   tableColumns: TableColumn[] = [
   { key: 'dateRange', label: 'Date Range' },
   { key: 'project', label: 'Primary Project' },
@@ -47,4 +51,21 @@ export class RecentTransactions {
   }
 ];
 
+onActionClick(event: { action: string; row: any }) {
+  if (event.action === 'delete') {
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        title: 'Delete Timesheet',
+        message: `Are you sure you want to delete the timesheet for ${event.row.project}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Logic to delete
+        console.log('Deleted timesheet', event.row);
+      }
+    });
+  }
+}
 }
