@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DynamicTable } from '../../common/components/dynamic-table/dynamic-table';
 
 interface Timesheet {
   id: number;
@@ -13,7 +14,7 @@ interface Timesheet {
 
 @Component({
   selector: 'app-timesheet-approvals',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DynamicTable],
   templateUrl: './timesheet-approvals.html',
   styleUrl: './timesheet-approvals.css',
 })
@@ -27,6 +28,13 @@ export class TimesheetApprovals {
   currentPage = 1;
   itemsPerPage = 5;
   math = Math;
+  loading = true;
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+  }
 
   timesheets: Timesheet[] = [
     {
@@ -88,6 +96,26 @@ export class TimesheetApprovals {
   ];
 
   selectedTimesheets: number[] = [];
+
+  columns = [
+    { key: 'employee', label: 'Employee' },
+    { key: 'period', label: 'Period' },
+    { key: 'projects', label: 'Projects' },
+    { key: 'totalHours', label: 'Total Hours' },
+    { key: 'status', label: 'Status' },
+    { key: 'actions', label: 'Actions' }
+  ];
+
+  get tableData() {
+    return this.paginatedTimesheets.map(timesheet => ({
+      employee: `${timesheet.employee.name} (${timesheet.employee.role})`,
+      period: timesheet.period,
+      projects: timesheet.projects.join(', '),
+      totalHours: timesheet.totalHours,
+      status: timesheet.status,
+      actions: '' // placeholder
+    }));
+  }
 
   get filteredTimesheets() {
     return this.timesheets.filter(timesheet => {

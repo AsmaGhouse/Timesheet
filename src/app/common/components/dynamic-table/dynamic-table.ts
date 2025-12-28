@@ -16,4 +16,5 @@ export interface TableColumn {
 export class DynamicTable {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
+  @Input() loading: boolean = false;
 }
