@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatusBadge } from '../../directives/status-badge';
 
@@ -17,4 +17,5 @@ export class DynamicTable {
   @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
   @Input() loading: boolean = false;
+  @Output() actionClick = new EventEmitter<{ action: string; row: any }>();
 }

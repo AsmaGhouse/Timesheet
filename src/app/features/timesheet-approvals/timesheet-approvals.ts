@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DynamicTable } from '../../common/components/dynamic-table/dynamic-table';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialog } from '../../common/components/confirmation-dialog/confirmation-dialog';
 
 interface Timesheet {
   id: number;
@@ -29,6 +31,8 @@ export class TimesheetApprovals {
   itemsPerPage = 5;
   math = Math;
   loading = true;
+
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -142,6 +146,43 @@ export class TimesheetApprovals {
       this.selectedTimesheets.splice(index, 1);
     } else {
       this.selectedTimesheets.push(id);
+    }
+  }
+
+  approveAllSelected() {
+    if (this.selectedTimesheets.length === 0) return;
+
+    const dialogRef = this.dialog.open(ConfirmationDialog, {
+      data: {
+        title: 'Approve All Selected',
+        message: `Are you sure you want to approve ${this.selectedTimesheets.length} selected timesheets?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Logic to approve
+        console.log('Approved selected timesheets');
+        this.selectedTimesheets = [];
+      }
+    });
+  }
+
+  onActionClick(event: { action: string; row: any }) {
+    if (event.action === 'delete') {
+      const dialogRef = this.dialog.open(ConfirmationDialog, {
+        data: {
+          title: 'Delete Timesheet',
+          message: `Are you sure you want to delete the timesheet for ${event.row.employee}?`
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Logic to delete
+          console.log('Deleted timesheet', event.row);
+        }
+      });
     }
   }
 
