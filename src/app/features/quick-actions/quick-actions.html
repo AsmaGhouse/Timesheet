@@ -1,17 +1,17 @@
-<div class="bg-white p-6 rounded-lg shadow-md">
+<div class="">
   <h2 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h2>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <button mat-raised-button color="primary" (click)="newProjectTask.emit()">
-      <mat-icon>add</mat-icon>
+  <div class="grid grid-cols-1 gap-4">
+    <div class="py-2 bg-gray-200 rounded-lg shadow-sm px-4 cursor-pointer hover:bg-gray-200/50" (click)="newProjectTask.emit()">
+      <img src="/assets/icons/quick-action-1.png" class="h-8 w-8 inline-block rounded-full"/>
       New Project Task
-    </button>
-    <button mat-raised-button color="accent" (click)="requestTime.emit()">
-      <mat-icon>schedule</mat-icon>
+    </div>
+    <div class="py-2 bg-gray-200 rounded-lg shadow-sm px-4 cursor-pointer hover:bg-gray-200/50" (click)="requestTime.emit()">
+      <img src="/assets/icons/quick-action-2.png" class="h-8 w-8 inline-block rounded-full"/>
       Request Time
-    </button>
-    <button mat-raised-button color="warn" (click)="generateReport.emit()">
-      <mat-icon>download</mat-icon>
+    </div>
+    <div class="py-2 bg-gray-200 rounded-lg shadow-sm px-4 cursor-pointer hover:bg-gray-200/50" (click)="generateReport.emit()">
+      <img src="/assets/icons/quick-action-3.png" class="h-8 w-8 inline-block rounded-full"/>
       Generate Report
-    </button>
+    </div>
   </div>
 </div>

@@ -45,24 +45,20 @@
     </div>
   </div>
 
-  <!-- Charts -->
+  <!-- Charts and Quick Actions -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
     <div class="bg-white p-6 rounded-lg shadow-md">
       <h2 class="text-xl font-semibold mb-4 text-gray-800">Sales Overview</h2>
       <app-chart [chartData]="barChartData"></app-chart>
     </div>
-    <div class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-4 text-gray-800">Revenue Trend</h2>
-      <app-chart [chartData]="lineChartData"></app-chart>
+    <div class="bg-white p-6 rounded-lg">
+      <app-quick-actions
+        (newProjectTask)="onNewProjectTask()"
+        (requestTime)="onRequestTime()"
+        (generateReport)="onGenerateReport()">
+      </app-quick-actions>
     </div>
   </div>
-
-  <!-- Quick Actions -->
-  <app-quick-actions
-    (newProjectTask)="onNewProjectTask()"
-    (requestTime)="onRequestTime()"
-    (generateReport)="onGenerateReport()">
-  </app-quick-actions>
 
   <!-- Recent Transactions -->
   <app-recent-transactions></app-recent-transactions>
