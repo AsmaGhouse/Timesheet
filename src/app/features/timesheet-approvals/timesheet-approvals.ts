@@ -189,4 +189,48 @@ export class TimesheetApprovals {
   get rejectedCount() {
     return this.timesheets.filter(t => t.status === 'Rejected').length;
   }
+
+  exportToCSV() {
+    const data = this.filteredTimesheets.map(timesheet => ({
+      'Employee': `${timesheet.employee.name} (${timesheet.employee.role})`,
+      'Period': timesheet.period,
+      'Projects': timesheet.projects.join(', '),
+      'Total Hours': timesheet.totalHours,
+      'Status': timesheet.status
+    }));
+
+    const csvContent = this.convertToCSV(data);
+    this.downloadCSV(csvContent, 'timesheet-approvals.csv');
+  }
+
+  private convertToCSV(data: any[]): string {
+    if (data.length === 0) return '';
+
+    const headers = Object.keys(data[0]);
+    const csvRows = [headers.join(',')];
+
+    for (const row of data) {
+      const values = headers.map(header => {
+        const value = row[header];
+        return `"${String(value).replace(/"/g, '""')}"`;
+      });
+      csvRows.push(values.join(','));
+    }
+
+    return csvRows.join('\n');
+  }
+
+  private downloadCSV(content: string, filename: string) {
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
 }
