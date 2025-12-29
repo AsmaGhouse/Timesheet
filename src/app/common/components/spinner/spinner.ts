@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
 export class Spinner {
   @Input() size: string = 'h-12 w-12';
   @Input() color: string = 'border-blue-500';
-  @Input() type: 'border' | 'dots' | 'bars' | 'wave' = 'border';
+  @Input() type: 'border' | 'dots' | 'bars' | 'wave' | 'ring' | 'pulse' | 'ellipsis' = 'border';
 }
