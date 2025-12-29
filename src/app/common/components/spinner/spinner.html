@@ -1,0 +1,20 @@
+<div *ngIf="type === 'border'" class="animate-spin rounded-full border-4 border-t-transparent {{ size }} {{ color }}"></div>
+<div *ngIf="type === 'dots'" class="flex space-x-1 {{ size }}">
+  <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+  <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+  <div class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+</div>
+<div *ngIf="type === 'bars'" class="flex space-x-1 {{ size }}">
+  <div class="w-1 bg-blue-500 animate-pulse" style="height: 100%; animation-delay: 0s;"></div>
+  <div class="w-1 bg-blue-500 animate-pulse" style="height: 80%; animation-delay: 0.1s;"></div>
+  <div class="w-1 bg-blue-500 animate-pulse" style="height: 60%; animation-delay: 0.2s;"></div>
+  <div class="w-1 bg-blue-500 animate-pulse" style="height: 40%; animation-delay: 0.3s;"></div>
+  <div class="w-1 bg-blue-500 animate-pulse" style="height: 20%; animation-delay: 0.4s;"></div>
+</div>
+<div *ngIf="type === 'wave'" class="flex space-x-1 {{ size }}">
+  <div class="w-2 bg-blue-500 animate-bounce" style="height: 20%; animation-delay: 0s;"></div>
+  <div class="w-2 bg-blue-500 animate-bounce" style="height: 40%; animation-delay: 0.1s;"></div>
+  <div class="w-2 bg-blue-500 animate-bounce" style="height: 60%; animation-delay: 0.2s;"></div>
+  <div class="w-2 bg-blue-500 animate-bounce" style="height: 80%; animation-delay: 0.3s;"></div>
+  <div class="w-2 bg-blue-500 animate-bounce" style="height: 100%; animation-delay: 0.4s;"></div>
+</div>
